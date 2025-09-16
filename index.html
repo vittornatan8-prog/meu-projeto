@@ -16,7 +16,7 @@
     <nav class="container nav">
       <a class="brand" href="#">
         <span class="logo" aria-hidden="true"></span>
-        <span>SeuNome <span style="color:var(--primary)">Personal</span></span>
+        <span>Willam Almeida <span style="color:var(--primary)">Personal</span></span>
       </a>
       <button class="menu-toggle" aria-label="Abrir menu">☰</button>
       <div class="links" id="menuLinks">
@@ -42,7 +42,6 @@
         <p>Atendimento individual, metodologia baseada em evidências e um plano que cabe no seu tempo. Do iniciante ao avançado.</p>
         <div class="cta-row">
           <a class="btn primary" href="#planos">Ver planos</a>
-          <button class="btn" id="openModal">Agendar avaliação</button>
         </div>
       </div>
       <div class="art" aria-hidden="true">
@@ -50,7 +49,7 @@
       </div>
     </section>
 
-    <!-- SOBRE -->
+   <!-- SOBRE -->
     <section id="sobre">
       <h2 class="section-title">Sobre mim</h2>
       <p class="section-sub">Sou Personal Trainer com foco em hipertrofia, emagrecimento saudável e reabilitação. Vamos construir um estilo de vida ativo, sem fórmulas mágicas.</p>
@@ -129,10 +128,8 @@
       <div class="cta-banner" style="margin-top:18px">
         <div>
           <strong>Dúvidas sobre o melhor plano?</strong>
-          <div class="section-sub">Agende uma conversa rápida e eu te ajudo a escolher.</div>
+          <div class="section-sub">Agende uma conversa rápida e eu te ajudo a escolher - acesse meu Whatsapp</div>
         </div>
-        <button class="btn" id="openModal2">Agendar agora</button>
-      </div>
     </section>
 
     <!-- RESULTADOS / DEPOIMENTOS -->
@@ -205,11 +202,55 @@
       </div>
     </section>
   </main>
+    
+    <!-- MODAL: Agendamento/Avaliação -->
+<dialog id="modal">
+  <div class="modal-head">
+    <strong>Agendar avaliação</strong>
+    <button class="btn" id="closeModal" type="button" aria-label="Fechar">✕</button>
+  </div>
+
+  <div class="modal-body">
+    <form id="formAvaliacao" novalidate>
+      <div class="field">
+        <label for="nome2">Nome</label>
+        <input id="nome2" name="nome" required />
+      </div>
+
+      <div class="field">
+        <label for="contato2">WhatsApp</label>
+        <input id="contato2" name="whatsapp" placeholder="(00) 00000-0000" required />
+      </div>
+
+      <div class="field">
+        <label for="cidade2">Cidade</label>
+        <input id="cidade2" name="cidade" placeholder="Sua cidade" required />
+      </div>
+
+      <div class="field">
+        <label for="horario2">Preferência de horário</label>
+        <select id="horario2" name="horario" required>
+          <option value="">Selecione</option>
+          <option>Manhã</option>
+          <option>Tarde</option>
+          <option>Noite</option>
+        </select>
+      </div>
+
+      <p class="error" id="erroModal">Preencha todos os campos.</p>
+
+      <div class="modal-actions">
+      <button class="btn close-modal" aria-label="Fechar">✕</button>
+      <button type="button" class="btn close-modal">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</dialog>
 
   <footer>
     <div class="container foot-grid">
       <div>
-        <a class="brand" href="#"><span class="logo"></span><span>SeuNome <span style="color:var(--primary)">Personal</span></span></a>
+        <a class="brand" href="#"><span class="logo"></span><span>Willam Almeida<span style="color:var(--primary)">Personal</span></span></a>
         <p style="margin-top:8px">CREF: 000000-G/UF • © <span id="ano"></span> Todos os direitos reservados.</p>
       </div>
       <div>
@@ -225,50 +266,11 @@
         <div class="foot-list">
           <a href="#">Termos de uso</a>
           <a href="#">Política de privacidade</a>
+            <!-- WhatsApp Floating (coloque seu link real do WhatsApp API) -->
+          <a class="whatsapp" href="https://wa.me/5500000000000" target="_blank" aria-label="Falar no WhatsApp">WA</a>
+          <dialog id="modal">
         </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- WhatsApp Floating (coloque seu link real do WhatsApp API) -->
-  <a class="whatsapp" href="https://wa.me/5500000000000" target="_blank" aria-label="Falar no WhatsApp">WA</a>
-
-  <!-- MODAL: Agendamento/Avaliação -->
-  <dialog id="modal">
-    <div class="modal-head">
-      <strong>Agendar avaliação</strong>
-      <button class="btn" id="closeModal" aria-label="Fechar">✕</button>
-    </div>
-    <div class="modal-body">
-      <form id="formAvaliacao" novalidate>
-        <div class="field">
-          <label for="nome2">Nome</label>
-          <input id="nome2" name="nome" required />
-        </div>
-        <div class="field">
-          <label for="contato2">WhatsApp</label>
-          <input id="contato2" name="whatsapp" placeholder="(00) 00000-0000" required />
-        </div>
-        <div class="field">
-          <label for="cidade2">Cidade</label>
-          <input id="cidade2" name="cidade" placeholder="Sua cidade" required />
-        </div>
-        <div class="field">
-          <label for="horario2">Preferência de horário</label>
-          <select id="horario2" name="horario" required>
-            <option value="">Selecione</option>
-            <option>Manhã</option>
-            <option>Tarde</option>
-            <option>Noite</option>
-          </select>
-        </div>
-        <p class="error" id="erroModal">Preencha todos os campos.</p>
-        <div class="modal-actions">
-          <button type="button" class="btn" id="cancelar">Cancelar</button>
-          <button type="submit" class="btn primary">Solicitar</button>
-        </div>
-      </form>
-    </div>
-  </dialog>
-</body>
+     </footer>
+    <script src="script.js"></script>
+  </body>
 </html>
