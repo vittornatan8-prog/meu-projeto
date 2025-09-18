@@ -90,27 +90,30 @@ function initFormContato() {
 // MODAL
 // ================================
 function initModal() {
-  const modal = document.getElementById("modal");
+  const modal = document.querySelector("#modal");
   const openButtons = document.querySelectorAll(".open-modal");
-  const closeButtons = document.querySelectorAll(".close-modal");
+  const closeButton = document.querySelector("#closeModal");
+  const form = document.querySelector("#formAvaliacao");
+  const erroMsg = document.querySelector("#erroModal");
 
   if (!modal) return;
 
-  // Abre modal ao clicar nos botões
+  // Abre modal
   openButtons.forEach(button => {
     button.addEventListener("click", () => {
       modal.showModal();
+      if (erroMsg) erroMsg.style.display = "none"; // esconde erro ao abrir
     });
   });
 
-  // Fecha modal ao clicar nos botões com classe "close-modal"
-  closeButtons.forEach(button => {
-    button.addEventListener("click", () => {
+  // Fecha modal no botão "Cancelar"
+  if (closeButton) {
+    closeButton.addEventListener("click", () => {
       modal.close();
     });
-  });
+  }
 
-  // Fecha modal ao clicar fora dele
+  // Fecha modal ao clicar fora
   modal.addEventListener("click", (e) => {
     const dialogDimensions = modal.getBoundingClientRect();
     if (
@@ -122,61 +125,46 @@ function initModal() {
       modal.close();
     }
   });
+
+  // Envia formulário para WhatsApp
+  if (form) {
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      let whatsapp = document.getElementById("contato2").value.trim();
+      let cidade = document.getElementById("cidade2").value.trim();
+      let horario = document.getElementById("horario2").value.trim();
+
+      // Verificação simples
+      if (!whatsapp || !cidade || !horario) {
+        if (erroMsg) {
+          erroMsg.style.display = "block"; // mostra mensagem de erro
+        }
+        return; // não envia
+      }
+
+      // Oculta mensagem de erro se os campos estiverem ok
+      if (erroMsg) erroMsg.style.display = "none";
+
+      // Seu número (formato: 55 + DDD + número)
+      let telefone = "5541996436889";
+
+      let mensagem = `*Novo agendamento de avaliação*%0A
+📱 WhatsApp: ${whatsapp}%0A
+🏙️ Cidade: ${cidade}%0A
+⏰ Horário preferido: ${horario}`;
+
+      let url = `https://wa.me/${telefone}?text=${mensagem}`;
+
+      window.open(url, "_blank"); // Abre WhatsApp
+      modal.close(); // Fecha modal depois de enviar
+      form.reset(); // Limpa o formulário
+    });
+  }
 }
 
-// ================================
-// FORMULÁRIO DE AVALIAÇÃO (MODAL)
-// ================================
-function initFormAvaliacao() {
-  const form = document.getElementById("formAvaliacao");
-  const modal = document.getElementById("modal");
-  const erro = document.getElementById("erroModal");
+initModal();
 
-  if (!form || !modal) return;
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const nome = document.getElementById("nome2").value.trim();
-    const whats = document.getElementById("contato2").value.trim();
-    const cidade = document.getElementById("cidade2").value.trim();
-    const horario = document.getElementById("horario2").value.trim();
-
-    // Validação básica
-    if (!nome || !whats || !cidade || !horario) {
-      erro.style.display = "block";
-      return;
-    }
-    erro.style.display = "none";
-
-    // Validação telefone
-    const regexTelefone = /^(\(\d{2}\)\s?)?\d{4,5}-?\d{4}$/;
-    if (!regexTelefone.test(whats)) {
-      alert("Digite um WhatsApp válido! Ex: (99) 99999-9999");
-      return;
-    }
-
-    // Monta mensagem
-    const texto = encodeURIComponent(
-      `📌 *Novo Agendamento*\n\n` +
-      `👤 *Nome:* ${nome}\n` +
-      `📱 *WhatsApp:* ${whats}\n` +
-      `🏙️ *Cidade:* ${cidade}\n` +
-      `⏰ *Horário:* ${horario}\n\n` +
-      `➡️ Solicitação enviada via formulário do site.`
-    );
-
-    // Defina aqui o número de destino do WhatsApp (somente números com DDD e DDI)
-    const NUMERO_WHATSAPP = "5599999999999";
-
-    const url = `https://wa.me/${NUMERO_WHATSAPP}?text=${texto}`;
-
-    // Fecha modal, reseta e abre WhatsApp
-    modal.close();
-    form.reset();
-    window.open(url, "_blank");
-  });
-}
 
 // ================================
 // INICIALIZAÇÃO
