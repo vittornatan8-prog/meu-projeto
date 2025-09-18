@@ -24,7 +24,7 @@
         <a href="#servicos">Serviços</a>
         <a href="#planos">Planos</a>
         <a href="#resultados">Resultados</a>
-        <a class="btn cta" href="#contato">Agendar avaliação</a>
+        <a class="btn-assinar btn cta open-modal" href="#modal">Agendar avaliação</a>
       </div>
     </nav>
   </header>
@@ -89,48 +89,77 @@
       </div>
     </section>
 
-    <!-- PLANOS -->
-    <section id="planos">
-      <h2 class="section-title">Planos</h2>
-      <p class="section-sub">Sem fidelidade. Cancele quando quiser.</p>
-      <div class="grid grid-3">
-        <article class="card">
-          <h3>Start</h3>
-          <div><span class="price">R$ 149</span> <span class="period">/ mês</span></div>
-          <ul class="ul">
-            <li><span class="check"></span> Treino personalizado mensal</li>
-            <li><span class="check"></span> Suporte quinzenal</li>
-            <li><span class="check"></span> Acesso ao app</li>
-          </ul>
-          <button class="btn primary open-modal">Começar</button>
-        </article>
-        <article class="card" style="border:2px solid #4ade80aa">
-          <h3>Pro • Recomendo</h3>
-          <div><span class="price">R$ 249</span> <span class="period">/ mês</span></div>
-          <ul class="ul">
-            <li><span class="check"></span> Ajustes semanais</li>
-            <li><span class="check"></span> Acompanhamento por WhatsApp</li>
-            <li><span class="check"></span> Avaliação física trimestral</li>
-          </ul>
-          <button class="btn primary open-modal">Assinar Pro</button>
-        </article>
-        <article class="card">
-          <h3>Premium</h3>
-          <div><span class="price">R$ 399</span> <span class="period">/ mês</span></div>
-          <ul class="ul">
-            <li><span class="check"></span> Sessões presenciais (1x/sem)</li>
-            <li><span class="check"></span> Check-in ilimitado</li>
-            <li><span class="check"></span> Plano integrado com nutricionista*</li>
-          </ul>
-          <button class="btn primary open-modal">Quero Premium</button>
-        </article>
+<!-- PLANOS -->
+<section id="planos">
+  <h2 class="section-title">Planos</h2>
+  <p class="section-sub">Sem fidelidade. Cancele quando quiser.</p>
+  <div class="grid grid-3">
+    <!-- PLANO START -->
+    <article class="card">
+      <h3>Start</h3>
+      <div class="price">R$ 149 <span class="period">/ mês</span></div>
+      <ul class="ul">
+        <li><span class="check"></span> Treino personalizado mensal</li>
+        <li><span class="check"></span> Suporte quinzenal</li>
+        <li><span class="check"></span> Acesso ao app</li>
+      </ul>
+      <button class="btn primary" onclick="enviarWhatsApp(
+        'Start', 
+        'R$ 149/mês', 
+        ['Treino personalizado mensal','Suporte quinzenal','Acesso ao app']
+      )">
+        Começar
+      </button>
+    </article>
+
+    <!-- PLANO PRO -->
+    <article class="card">
+      <h3>Pro <small>• Recomendado</small></h3>
+      <div class="price">R$ 249 <span class="period">/ mês</span></div>
+      <ul class="ul">
+        <li><span class="check"></span> Acompanhamento semanal</li>
+        <li><span class="check"></span> Avaliação física trimestral</li>
+        <li><span class="check"></span> Ajustes semanais</li>
+      </ul>
+      <button class="btn primary" onclick="enviarWhatsApp(
+        'Pro', 
+        'R$ 249/mês', 
+        ['Acompanhamento semanal','Avaliação física trimestral','Ajustes semanais']
+      )">
+        Assinar Pro
+      </button>
+    </article>
+
+    <!-- PLANO PREMIUM -->
+    <article class="card">
+      <h3>Premium</h3>
+      <div class="price">R$ 349 <span class="period">/ mês</span></div>
+      <ul class="ul">
+        <li><span class="check"></span> Consultoria individual ilimitada</li>
+        <li><span class="check"></span> Avaliação física mensal</li>
+        <li><span class="check"></span> Planos de treino + nutrição</li>
+        <li><span class="check"></span> Suporte VIP 24h</li>
+      </ul>
+      <button class="btn primary" onclick="enviarWhatsApp(
+        'Premium', 
+        'R$ 349/mês', 
+        ['Consultoria individual ilimitada','Avaliação física mensal','Planos de treino + nutrição','Suporte VIP 24h']
+      )">
+        Quero Premium
+      </button>
+    </article>
+  </div>
+</section>
+
+  <div class="cta-banner" style="margin-top:18px">
+    <div>
+      <strong>Dúvidas sobre o melhor plano?</strong>
+      <div class="section-sub">
+        Agende uma conversa rápida e eu te ajudo a escolher - acesse meu Whatsapp
       </div>
-      <div class="cta-banner" style="margin-top:18px">
-        <div>
-          <strong>Dúvidas sobre o melhor plano?</strong>
-          <div class="section-sub">Agende uma conversa rápida e eu te ajudo a escolher - acesse meu Whatsapp</div>
-        </div>
-    </section>
+    </div>
+  </div>
+</section>
 
     <!-- RESULTADOS / DEPOIMENTOS -->
     <section id="resultados">
@@ -266,7 +295,7 @@
           <a href="#">Termos de uso</a>
           <a href="#">Política de privacidade</a>
             <!-- WhatsApp Floating (coloque seu link real do WhatsApp API) -->
-          <a class="whatsapp" href="https://wa.me/5500000000000" target="_blank" aria-label="Falar no WhatsApp">WA</a>
+          <a class="whatsapp" href="https://wa.me/5541996436889" target="_blank" aria-label="Falar no WhatsApp">WA</a>
           <dialog id="modal">
         </div>
      </footer>

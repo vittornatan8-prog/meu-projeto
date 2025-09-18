@@ -1,7 +1,7 @@
 // ================================
 // CONFIGURAÇÕES
 // ================================
-const NUMERO_WHATSAPP = "5585980000000"; // Coloque aqui o número com DDI + DDD
+const NUMERO_WHATSAPP = "5541996436889"; // Coloque aqui o número com DDI + DDD
 
 // ================================
 // UTILITÁRIOS
@@ -58,9 +58,9 @@ function initHeaderScroll() {
   onScroll(); // inicial
 }
 
-// ================================
-// FORMULÁRIO DE CONTATO
-// ================================
+// =================================
+// FORMULÁRIO DE CONTATO -> WHATSAPP
+// =================================
 function initFormContato() {
   const formContato = document.getElementById("formContato");
   const erro = document.getElementById("erroForm");
@@ -72,20 +72,31 @@ function initFormContato() {
 
     const nome = formContato.nome.value.trim();
     const email = formContato.email.value.trim();
-    const objetivo = formContato.objetivo.value;
+    const objetivo = formContato.objetivo.value.trim();
 
-    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const emailok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-    if (!nome || !emailOk || !objetivo) {
+    if (!nome || !emailok || !objetivo) {
       erro.style.display = "block";
       return;
     }
 
     erro.style.display = "none";
-    alert("Obrigado! Em breve entrarei em contato.");
+
+    // ======== WhatsApp =========
+    const numeroWhats = "5541996436889"; // Coloque o número do autor (código do país + DDD + número)
+    const mensagem = `Olá, meu nome é ${nome}.%0AEmail: ${email}%0AObjetivo: ${objetivo}`;
+
+    const link = `https://wa.me/${numeroWhats}?text=${mensagem}`;
+
+    // Abre o WhatsApp com a mensagem
+    window.open(link, "_blank");
+
+    // Limpa o formulário
     formContato.reset();
   });
 }
+
 // ================================
 // MODAL
 // ================================
@@ -169,7 +180,55 @@ initModal();
 // ================================
 // INICIALIZAÇÃO
 // ================================
+
 document.addEventListener("DOMContentLoaded", () => {
   initModal();
-  initFormAvaliacao();
+  initFormContato();
+  initMenuMobile(); // ✅ ativa o menu mobile
+
+  // DEBUG para ver se os botões aparecem no mobile
+  const botoes = document.querySelectorAll(".btn-assinar");
+  console.log("Botões encontrados:", botoes.length);
+
+  botoes.forEach((btn, i) => {
+    console.log(`Botão ${i + 1}:`, btn.innerText);
+  });
 });
+
+
+  // Número do autor no formato internacional (ex: Brasil 55 + DDD + número)
+  const numeroAutor = "5541996436889";
+
+  document.querySelectorAll(".btn-assinar").forEach(button => {
+    button.addEventListener("click", function() {
+      const card = this.closest(".card");
+
+      const nomePlano = card.querySelector("h3").innerText;
+      const preco = card.querySelector(".price").innerText + " " + card.querySelector(".period").innerText;
+      
+      const beneficios = Array.from(card.querySelectorAll("ul li"))
+        .map(li => "- " + li.innerText)
+        .join("%0A");
+
+    });
+  });
+
+  function enviarWhatsApp(nomePlano, preco, beneficios) {
+  const numero = "5541996436889"; // <- Coloque aqui o número do autor (55 + DDD + número)
+  const beneficiosTexto = beneficios.map(b => `- ${b}`).join('%0A'); 
+  const mensagem = `Olá! Quero assinar o plano *${nomePlano}*%0APreço: ${preco}%0A%0A*Benefícios:*%0A${beneficiosTexto}`;
+  
+  const url = `https://wa.me/${numero}?text=${mensagem}`;
+  window.open(url, "_blank");}
+
+function initMenuMobile() {
+  const btnMenu = document.querySelector(".menu-toggle");
+  const menuLinks = document.getElementById("menuLinks");
+
+  if (!btnMenu || !menuLinks) return;
+
+  btnMenu.addEventListener("click", () => {
+    menuLinks.classList.toggle("ativo"); // alterna a classe ativo
+  });
+}
+

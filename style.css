@@ -59,9 +59,27 @@ header.scrolled {
     .hero .art .grid{position:absolute; inset:-20%; background-image: radial-gradient(#ffffff15 1px, transparent 1px); background-size: 20px 20px; animation: float 30s linear infinite}
     @keyframes float{to{transform:translateY(-40px)}}
     .hero .cta-row{display:flex; gap:14px; flex-wrap:wrap}
-    .btn{display:inline-flex; align-items:center; gap:8px; padding:12px 18px; border-radius:14px; border:1px solid #ffffff20; background:#0f1420; color:var(--txt); cursor:pointer; transition:transform .12s ease, box-shadow .12s ease}
-    .btn:hover{transform:translateY(-1px); box-shadow:0 8px 24px #00000040}
-    .btn.primary{background:linear-gradient(90deg, var(--primary), #b4f7cd); color:#0b111b; font-weight:800}
+
+    .btn{
+      display:inline-flex; 
+      align-items:center; 
+      gap:8px; 
+      padding:12px 18px;
+      border-radius:14px; 
+      border:1px solid #ffffff20; 
+      background:#0f1420; 
+      color:var(--txt); 
+      cursor:pointer; 
+      transition:transform .12s ease, box-shadow .12s ease}
+
+    .btn:hover{
+      transform:translateY(-1px); 
+      box-shadow:0 8px 24px #00000040}
+
+    .btn.primary{
+      background:linear-gradient(90deg, var(--primary), #b4f7cd); 
+      color:#0b111b; 
+      font-weight:800}
 
     /* Sections */
     section{padding:64px 0}
@@ -237,13 +255,32 @@ header.scrolled {
   nav a:hover{ background: rgba(255,255,255,0.04) }
 
       /* Mobile menu */
-    .menu-toggle{display:none; border:1px solid #ffffff2a; padding:10px 12px; border-radius:12px; background:#0f1420;}
+    .menu-toggle {
+      display:none; 
+      border:1px solid #ffffff2a; 
+      padding:10px 12px; 
+      border-radius:12px; 
+      background:#0f1420;
+    }
+
     .links{display:flex; gap:22px; align-items:center}
     .links a{color:var(--muted)}
     .links a:hover{color:var(--txt)}
     @media (max-width: 820px){
-    .menu-toggle{display:block}
-    .links{display:none; position:absolute; right:4%; top:64px; flex-direction:column; background:var(--card); padding:14px; border-radius:14px; border:1px solid #ffffff1a; box-shadow:var(--shadow)}
+    .menu-toggle{
+      display:block}
+    .links{
+      display:none; 
+      position:absolute; 
+      right:4%; 
+      top:64px; 
+      flex-direction:column; 
+      background:var(--card); 
+      padding:14px; 
+      border-radius:14px; 
+      border:1px solid #ffffff1a; 
+      box-shadow:var(--shadow)}
+      
     .links.open{display:flex}
     }
 
