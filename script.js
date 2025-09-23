@@ -24,6 +24,7 @@ function initMenuMobile() {
 
   if (!menuBtn || !nav) return;
 
+  // Abre/fecha menu ao clicar no botão
   menuBtn.addEventListener("click", () => {
     const expanded = menuBtn.getAttribute("aria-expanded") === "true";
     menuBtn.setAttribute("aria-expanded", (!expanded).toString());
@@ -31,7 +32,7 @@ function initMenuMobile() {
     toggleClasse(nav, "open");
   });
 
-  // Fecha menu ao clicar em link (mobile)
+  // Fecha menu ao clicar em um link (mobile)
   nav.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
       if (window.matchMedia("(max-width:900px)").matches) {
@@ -84,16 +85,11 @@ function initFormContato() {
     erro.style.display = "none";
 
     // ======== WhatsApp =========
-    const numeroWhats = "5541996436889"; // Coloque o número do autor (código do país + DDD + número)
-    const mensagem = `Olá, meu nome é ${nome}.%0AEmail: ${email}%0AObjetivo: ${objetivo}`;
+    const mensagem = `Olá, meu nome é ${nome}.%0AEmail: ${email}%0AObjetivo: ${objetivo}%0AMensagem: ${Mensagem}`;
+    const link = `https://wa.me/${NUMERO_WHATSAPP}?text=${mensagem}`;
 
-    const link = `https://wa.me/${numeroWhats}?text=${mensagem}`;
-
-    // Abre o WhatsApp com a mensagem
-    window.open(link, "_blank");
-
-    // Limpa o formulário
-    formContato.reset();
+    window.open(link, "_blank"); // abre WhatsApp
+    formContato.reset(); // limpa formulário
   });
 }
 
@@ -113,7 +109,7 @@ function initModal() {
   openButtons.forEach(button => {
     button.addEventListener("click", () => {
       modal.showModal();
-      if (erroMsg) erroMsg.style.display = "none"; // esconde erro ao abrir
+      if (erroMsg) erroMsg.style.display = "none";
     });
   });
 
@@ -146,89 +142,49 @@ function initModal() {
       let cidade = document.getElementById("cidade2").value.trim();
       let horario = document.getElementById("horario2").value.trim();
 
-      // Verificação simples
       if (!whatsapp || !cidade || !horario) {
-        if (erroMsg) {
-          erroMsg.style.display = "block"; // mostra mensagem de erro
-        }
-        return; // não envia
+        if (erroMsg) erroMsg.style.display = "block";
+        return;
       }
 
-      // Oculta mensagem de erro se os campos estiverem ok
       if (erroMsg) erroMsg.style.display = "none";
 
-      // Seu número (formato: 55 + DDD + número)
-      let telefone = "5541996436889";
+      let mensagem = `*Novo agendamento de avaliação*%0A📱 WhatsApp: ${whatsapp}%0A🏙️ Cidade: ${cidade}%0A⏰ Horário preferido: ${horario}`;
+      let url = `https://wa.me/${NUMERO_WHATSAPP}?text=${mensagem}`;
 
-      let mensagem = `*Novo agendamento de avaliação*%0A
-📱 WhatsApp: ${whatsapp}%0A
-🏙️ Cidade: ${cidade}%0A
-⏰ Horário preferido: ${horario}`;
-
-      let url = `https://wa.me/${telefone}?text=${mensagem}`;
-
-      window.open(url, "_blank"); // Abre WhatsApp
-      modal.close(); // Fecha modal depois de enviar
-      form.reset(); // Limpa o formulário
+      window.open(url, "_blank");
+      modal.close();
+      form.reset();
     });
   }
 }
 
-initModal();
+function enviarWhatsApp(plano, preco, beneficios) {
+  // 🔴 Troque este número pelo seu WhatsApp (formato: 55 + DDD + número)
+  const telefone = "5541996436889"; 
+
+  // Monta a mensagem com emojis
+  let mensagem = `👋 Olá! Tenho interesse no plano *${plano}* (${preco}).\n\n🔥 Benefícios inclusos:`;
+  beneficios.forEach(item => {
+    mensagem += `\n✅ ${item}`;
+  });
+
+  mensagem += `\n\n💪 Quero começar ainda hoje!`;
+
+  // Link do WhatsApp
+  const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+
+  // Abre no WhatsApp Web ou App
+  window.open(url, "_blank");
+}
 
 
 // ================================
 // INICIALIZAÇÃO
 // ================================
-
 document.addEventListener("DOMContentLoaded", () => {
-  initModal();
+  initMenuMobile();
+  initHeaderScroll();
   initFormContato();
-  initMenuMobile(); // ✅ ativa o menu mobile
-
-  // DEBUG para ver se os botões aparecem no mobile
-  const botoes = document.querySelectorAll(".btn-assinar");
-  console.log("Botões encontrados:", botoes.length);
-
-  botoes.forEach((btn, i) => {
-    console.log(`Botão ${i + 1}:`, btn.innerText);
-  });
+  initModal();
 });
-
-
-  // Número do autor no formato internacional (ex: Brasil 55 + DDD + número)
-  const numeroAutor = "5541996436889";
-
-  document.querySelectorAll(".btn-assinar").forEach(button => {
-    button.addEventListener("click", function() {
-      const card = this.closest(".card");
-
-      const nomePlano = card.querySelector("h3").innerText;
-      const preco = card.querySelector(".price").innerText + " " + card.querySelector(".period").innerText;
-      
-      const beneficios = Array.from(card.querySelectorAll("ul li"))
-        .map(li => "- " + li.innerText)
-        .join("%0A");
-
-    });
-  });
-
-  function enviarWhatsApp(nomePlano, preco, beneficios) {
-  const numero = "5541996436889"; // <- Coloque aqui o número do autor (55 + DDD + número)
-  const beneficiosTexto = beneficios.map(b => `- ${b}`).join('%0A'); 
-  const mensagem = `Olá! Quero assinar o plano *${nomePlano}*%0APreço: ${preco}%0A%0A*Benefícios:*%0A${beneficiosTexto}`;
-  
-  const url = `https://wa.me/${numero}?text=${mensagem}`;
-  window.open(url, "_blank");}
-
-function initMenuMobile() {
-  const btnMenu = document.querySelector(".menu-toggle");
-  const menuLinks = document.getElementById("menuLinks");
-
-  if (!btnMenu || !menuLinks) return;
-
-  btnMenu.addEventListener("click", () => {
-    menuLinks.classList.toggle("ativo"); // alterna a classe ativo
-  });
-}
-
