@@ -154,7 +154,7 @@ header.scrolled {
     .modal-actions{display:flex; justify-content:flex-end; gap:10px; padding:0 18px 18px}
     .error{color:var(--danger); font-size:14px; display:none
     }
-
+   
 /* Responsivo */
 @media (max-width: 768px) {
     nav ul {
@@ -177,25 +177,8 @@ header.scrolled {
     .menu-toggle {
         display: flex;
     }
-}
 
-/* Animação do botão quando ativo */
-.menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
 }
-.menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-}
-.menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
-}
-  :root{
-    --header-height: 64px;
-    --bg: #0f1724;
-    --card-bg: #0b1220;
-    --txt: #e6eef9;
-    --accent: #4ade80;
-  }
 
   *{box-sizing:border-box}
   html,body{height:100%}
@@ -253,3 +236,86 @@ header.scrolled {
     font-size:15px;
   }
   nav a:hover{ background: rgba(255,255,255,0.04) }
+
+  /* Cabeçalho */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0c0f14;
+  padding: 10px 20px;
+  color: white;
+  position: relative;
+}
+
+/* Logo */
+.logo {
+  font-weight: bold;
+  font-size: 18px;
+}
+.logo span {
+  color: #4ade80; /* verde */
+}
+
+/* Links */
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Botão "Agendar" menor */
+.btn-agendar {
+  background: #4ade80;
+  color: #0c0f14;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.btn-agendar:hover {
+  background: #22c55e;
+}
+
+/* Botão hambúrguer */
+.hamburger {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* estilo normal (desktop) */
+.links {
+  display: flex;
+  gap: 1rem;
+}
+
+/* botão hamburguer escondido no desktop */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .links {
+    display: none; /* 🔴 esconde os links no mobile */
+    flex-direction: column;
+    background: #111;
+    position: absolute;
+    top: 60px;   /* ajuste conforme altura do header */
+    right: 10px;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+
+  .links.active {
+    display: flex; /* ✅ aparece quando tiver a classe active */
+  }
+
+  .hamburger {
+    display: block; /* mostra o hambúrguer no mobile */
+  }
+}

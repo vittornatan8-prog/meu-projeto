@@ -85,7 +85,7 @@ function initFormContato() {
     erro.style.display = "none";
 
     // ======== WhatsApp =========
-    const mensagem = `Olá, meu nome é ${nome}.%0AEmail: ${email}%0AObjetivo: ${objetivo}%0AMensagem: ${Mensagem}`;
+    const mensagem = `Olá, meu nome é ${nome}.%0AEmail: ${email}%0AObjetivo: ${objetivo}`;
     const link = `https://wa.me/${NUMERO_WHATSAPP}?text=${mensagem}`;
 
     window.open(link, "_blank"); // abre WhatsApp
@@ -187,4 +187,11 @@ document.addEventListener("DOMContentLoaded", () => {
   initHeaderScroll();
   initFormContato();
   initModal();
+});
+
+const hamburger = document.getElementById("hamburger");
+const navLinks = document.getElementById("menuLinks");
+
+hamburger.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
 });
